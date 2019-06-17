@@ -1,10 +1,13 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 
 import Header from './header';
 import HotelResult from './hotel_result';
+import FilterInput from './filter_input';
+
+import '../styles/hotel_results.scss';
 
 function HotelResults() {
-  const [hotelList, setHotelList] = useState(
+  const [hotelList] = useState(
     [
       {
         "id": 156,
@@ -27,11 +30,31 @@ function HotelResults() {
     ]
   );
 
+  const[filteredHotelList, setFilteredHotelList] = useState();
+
+  const handleFilterChange = (e) => {
+    let filteredHotelList = hotelList.slice();
+    filteredHotelList = filteredHotelList.filter(hotel => {
+      return (hotel.facilities.some(facility => facility.includes(e.target.value)))
+    });
+
+    setFilteredHotelList(filteredHotelList);
+  }
+
+  const hotels = filteredHotelList ? filteredHotelList : hotelList;
 
   return (
     <Fragment>
       <Header />
-      { hotelList.map(hotel => {
+      <div className='filters'>
+        <FilterInput
+          type='text'
+          filterName='facilities-filter'
+          placeholder={ 'Filter by Facilities' }
+          onChange={ handleFilterChange }
+        />
+      </div>
+      { hotels.map(hotel => {
         return (
           <HotelResult
             key={ hotel.id }
