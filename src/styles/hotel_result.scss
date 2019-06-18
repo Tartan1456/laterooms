@@ -1,5 +1,35 @@
 .hotel-result {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: 1em;
+
+  &__image {
+    border: 0.1em #c0c0c0 solid;
+    height: 15em;
+    width: 15em;
+  }
+
+  &__information {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1em;
+  }
+
+  &__name {
+    font-size: 1.5em;
+  }
+
+  &__star-rating {
+    padding: 0.5em 0;
+  }
+
+  &__star {
+    height: 2em;
+    width: 2em;
+  }
+
+  &__facilities {
+    font-size: 1.3em;
+    text-transform: capitalize;
+  }
 }

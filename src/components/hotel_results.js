@@ -11,19 +11,19 @@ function HotelResults() {
     [
       {
         "id": 156,
-        "name": "hotelone",
+        "name": "Hotel One",
         "starRating": 5,
         "facilities": ["car park", "pool"]
       },
       {
         "id": 178,
-        "name": "hoteltwo",
+        "name": "Hotel Two",
         "starRating": 3,
         "facilities": ["car park", "gym"]
       },
       {
         "id": 213,
-        "name": "hotelthree",
+        "name": "Hotel Three",
         "starRating": 3,
         "facilities": ["gym", "pool"]
       }
@@ -35,7 +35,7 @@ function HotelResults() {
   const handleFilterChange = (e) => {
     let filteredHotelList = hotelList.slice();
     filteredHotelList = filteredHotelList.filter(hotel => {
-      return (hotel.facilities.some(facility => facility.includes(e.target.value)))
+      return (hotel.facilities.some(facility => facility.includes(e.target.value.toLowerCase())))
     });
 
     setFilteredHotelList(filteredHotelList);
@@ -46,22 +46,24 @@ function HotelResults() {
   return (
     <Fragment>
       <Header />
-      <div className='filters'>
-        <FilterInput
-          type='text'
-          filterName='facilities-filter'
-          placeholder={ 'Filter by Facilities' }
-          onChange={ handleFilterChange }
-        />
-      </div>
-      { hotels.map(hotel => {
-        return (
-          <HotelResult
-            key={ hotel.id }
-            {...hotel}
+      <main>
+        <div className='filters'>
+          <FilterInput
+            type='text'
+            filterName='facilities-filter'
+            placeholder={ 'Filter by Facilities' }
+            onChange={ handleFilterChange }
           />
-        );
-      })}
+        </div>
+        { hotels.map(hotel => {
+          return (
+            <HotelResult
+              key={ hotel.id }
+              {...hotel}
+            />
+          );
+        })}
+      </main>
     </Fragment>
   )
 };
